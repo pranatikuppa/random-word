@@ -57,19 +57,16 @@ class RandomWordGenerator:
 	def get_random_word(self):
 		return self.__get_random_word_from_web()
 
-    # def get_random_words(self, number_of_words="1000"):
-    # 	words = []
-    """
+    def get_random_words(self, number_of_words="1000"):
+    	words = []
     	while number_of_words != 0: 
     		words.append(get_random_word())
     		number_of_words -=1
     	return words
-    """
 
 
-    # def get_random_words_within_range(self, min_word_length="0", max_word_length="-1", num_of_words = "1000"):
-    #	raw_words = get_random_words(num_of_words)
-    """
+    def get_random_words_within_range(self, min_word_length="0", max_word_length="-1", num_of_words = "1000"):
+    	raw_words = get_random_words(num_of_words)
     	if min_word_length == 0 && max_word_length == -1:
     		return raw_words
     	else if min_word_length != 0 and max_word_length == -1: 
@@ -79,17 +76,14 @@ class RandomWordGenerator:
     	else: 
     		valid_words = [word for word in raw_words if word.len() > min_word_length && word.len() < max_word_length]
     	return valid_words
-    """
 
-    # def get_random_words_start_with(self, start_letter=None, num_of_words="1000"):
-    #	raw_words = get_random_words()
-    """
+    def get_random_words_start_with(self, start_letter=None, num_of_words="1000"):
+    	raw_words = get_random_words()
     	if start_letter == None: 
     		return raw_words
     	else: 
     		valid_words = [word for word in raw_words if word[0] == start_letter]
     	return valid_words
-    """
 
     # def get_random_words_contains(self, substring):
 
