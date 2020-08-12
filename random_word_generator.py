@@ -38,21 +38,23 @@ class RandomWordGenerator:
 		search_box.submit()
 
 		all_websites = self.__driver.find_elements_by_class_name('g')
-		i = random.randint(0, len(all_websites))
+		i = random.randint(0, len(all_websites) - 1)
+		print(len(all_websites))
+		print(i)
 
 		selected_website = all_websites[i]
 		nested_rc_r = selected_website.find_element_by_class_name('rc').find_element_by_class_name('r')
-
-		self.__driver.get(website_link)
+		website_link = nested_rc_r.find_element_by_tag_name('a').get_attribute('href')
 		return website_link
 		# search_box.submit()
 		# self.__driver.quit()
 
 	def __get_random_word_from_web(self):
 		website = __get_random_website()
+		self.__driver.get(website)
 
 	def get_random_word(self):
-		self.__get_random_website()
+		return self.__get_random_word_from_web()
 
     # def get_random_words(number_of_words="-1"):
 
