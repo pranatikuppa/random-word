@@ -36,20 +36,27 @@ class RandomWordGenerator:
 		search_box = self.__driver.find_element_by_name('q')
 		search_box.send_keys(search_word)
 		search_box.submit()
-		self.__driver.quit()
+
+		all_websites = self.__driver.find_elements_by_class_name('g')
+		i = random.randint(0, len(all_websites))
+
+		selected_website = all_websites[i]
+		nested_rc_r = selected_website.find_element_by_class_name('rc').find_element_by_class_name('r')
+
+		self.__driver.get(website_link)
+		return website_link
+		# search_box.submit()
+		# self.__driver.quit()
+
+	def __get_random_word_from_web(self):
+		website = __get_random_website()
 
 	def get_random_word(self):
 		self.__get_random_website()
 
-    # def get_random_words():
+    # def get_random_words(number_of_words="-1"):
 
-    # def get_random_words(number_of_words):
-
-    # def get_random_words_within_range(min_word_length, max_word_length):
-
-    # def get_random_words_within_range(min_word_length):
-
-    # def get_random_words_within_range(max_word_length):
+    # def get_random_words_within_range(min_word_length="0", max_word_length="-1"):
 
     # def get_random_words_start_with(start_letter):
 
@@ -57,5 +64,4 @@ class RandomWordGenerator:
 
 if __name__ == '__main__':
 	random_word_gen = RandomWordGenerator()
-	word = random_word_gen.get_random_word()
-	print(word)
+	print(random_word_gen.get_random_word())
