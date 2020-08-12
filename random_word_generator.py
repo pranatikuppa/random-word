@@ -8,7 +8,8 @@ import random
 class RandomWordGenerator:
 
 	def __init__(self):
-		self.__driver = webdriver.Chrome("/Users/khushidesai/Desktop/csprojects/pythonwebscraping/chromedriver")
+		#REMINDER: change this link with your personal info !! 
+		self.__driver = webdriver.Chrome("/Users/pranatikuppa/Desktop/random_words/chromedriver")
 		self.__path = 'words.txt'
 		self.__special_char_pattern = '/[^a-zA-Z ]/g'
 		self.__dictionary_words = self.__load_dictionary()
@@ -54,13 +55,41 @@ class RandomWordGenerator:
 	def get_random_word(self):
 		self.__get_random_website()
 
-    # def get_random_words(number_of_words="-1"):
+    # def get_random_words(self, number_of_words="1000"):
+    # 	words = []
+    """
+    	while number_of_words != 0: 
+    		words.append(get_random_word())
+    		number_of_words -=1
+    	return words
+    """
 
-    # def get_random_words_within_range(min_word_length="0", max_word_length="-1"):
 
-    # def get_random_words_start_with(start_letter):
+    # def get_random_words_within_range(self, min_word_length="0", max_word_length="-1", num_of_words = "1000"):
+    #	raw_words = get_random_words(num_of_words)
+    """
+    	if min_word_length == 0 && max_word_length == -1:
+    		return raw_words
+    	else if min_word_length != 0 and max_word_length == -1: 
+    		valid_words = [word for word in raw_words if word.len() > min_word_length]
+    	else if min_word_length == 0 && max_word_length != -1:
+    		valid_words = [word for word in raw_words if word.len() < max_word_length]
+    	else: 
+    		valid_words = [word for word in raw_words if word.len() > min_word_length && word.len() < max_word_length]
+    	return valid_words
+    """
 
-    # def get_random_words_contains(substring):
+    # def get_random_words_start_with(self, start_letter=None, num_of_words="1000"):
+    #	raw_words = get_random_words()
+    """
+    	if start_letter == None: 
+    		return raw_words
+    	else: 
+    		valid_words = [word for word in raw_words if word[0] == start_letter]
+    	return valid_words
+    """
+
+    # def get_random_words_contains(self, substring):
 
 if __name__ == '__main__':
 	random_word_gen = RandomWordGenerator()
