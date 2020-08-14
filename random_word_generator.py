@@ -59,46 +59,96 @@ class RandomWordGenerator:
 		return self.__get_random_word_from_web()
 
 	#BELOW HERE: METHODS PK HAS WORKED ON
-    def get_random_words(self, number_of_words="1000"):
-    	words = []
-    	while number_of_words != 0: 
-    		words.append(get_random_word())
-    		number_of_words -=1
-    	return words
+	def get_random_words(self, number_of_words=1000):
+		words = []
+		while number_of_words != 0: 
+			words.append(random_word_gen.get_random_word())
+			number_of_words -=1
+		return words
 
+	#DISCLAIMER: THIS METHOD FOR TESTING PURPOSES ONLY
+	def get_rw_test(self): 
+		return ['test', 'words', 'generator', 'deletion', 'hi', 'there', 'preamble', 'precursor']
 
-    def get_random_words_within_range(self, min_word_length="0", max_word_length="-1", num_of_words = "1000"):
-    	raw_words = get_random_words(num_of_words)
-    	if min_word_length == 0 && max_word_length == -1:
-    		return raw_words
-    	else if min_word_length != 0 and max_word_length == -1: 
-    		valid_words = [word for word in raw_words if word.len() > min_word_length]
-    	else if min_word_length == 0 && max_word_length != -1:
-    		valid_words = [word for word in raw_words if word.len() < max_word_length]
-    	else: 
-    		valid_words = [word for word in raw_words if word.len() > min_word_length && word.len() < max_word_length]
-    	return valid_words
+	def get_random_words_within_range(self, min_word_length=0, max_word_length=-1, num_of_words = 1000):
+		#raw_words = random_word_gen.get_random_words(num_of_words)
+		#DISCLAIMER: LINE BELOW FOR TESTING PURPOSES ONLY
+		raw_words = random_word_gen.get_rw_test()
 
-    def get_random_words_start_with(self, start_letter=None, num_of_words="1000"):
-    	raw_words = get_random_words()
-    	if start_letter == None: 
-    		return raw_words
-    	else: 
-    		valid_words = [word for word in raw_words if word[0] == start_letter]
-    	return valid_words
+		if min_word_length == 0 and max_word_length == -1:
+			return raw_words
+		elif min_word_length != 0 and max_word_length == -1: 
+			valid_words = [word for word in raw_words if len(word) >= min_word_length]
+		elif min_word_length == 0 and max_word_length != -1:
+			valid_words = [word for word in raw_words if len(word) <= max_word_length]
+		else: 
+			valid_words = [word for word in raw_words if len(word) >= min_word_length and len(word) <= max_word_length]
+		return valid_words
 
-    def get_random_words_order(self, order='alpha'): 
-    	if order == 'alpha': 
-    		return get_random_words().sort(key = lambda l: l.lower())
-    	else if order == 'rev alpha': 
-    		return get_random_words().sort(reverse=True, key = lambda l: l.lower())
-    	else if order == 'len': 
-    		return get_random_words().sort(key = len)
-    	else if order == 'rev len':
-    		return get_random_words().sort(reverse=True, key = len)
+	def get_random_words_start_with(self, start_letter=None, num_of_words=1000):
+		#raw_words = random_word_gen.get_random_words()
+		#DISCLAIMER: LINE BELOW FOR TESTING PURPOSES ONLY
+		raw_words = random_word_gen.get_rw_test()
+		if start_letter == None: 
+			return raw_words
+		else: 
+			valid_words = [word for word in raw_words if word[0] == start_letter]
+		return valid_words
 
-    # def get_random_words_contains(self, substring):
+	def get_random_words_order(self, order='alpha',num_of_words=1000): 
+		#aw_words = random_word_gen.get_random_words()
+		#DISCLAIMER: LINE BELOW FOR TESTING PURPOSES ONLY
+		raw_words = random_word_gen.get_rw_test()
+		if order == 'alpha': 
+			raw_words.sort(key = lambda l: l.lower())
+			return raw_words
+		elif order == 'rev alpha': 
+			raw_words.sort(reverse=True, key = lambda l: l.lower())
+			return raw_words
+		elif order == 'len': 
+			raw_words.sort(key = len)
+			return raw_words
+		elif order == 'rev len':
+			raw_words.sort(reverse=True, key = len)
+			return raw_words
+
+	def get_random_words_contains(self, substr=''):
+		#aw_words = random_word_gen.get_random_words()
+		#DISCLAIMER: LINE BELOW FOR TESTING PURPOSES ONLY
+		raw_words = random_word_gen.get_rw_test()
+		return [word for word in raw_words if substr in word]
+
+	#def include_pos(self, pos)
+	#TO BE IMPLEMENTED WHEN WE FIGURE OUT HOW WE'RE USING CSV
+
+	#def language(self, lang='en')
+	#TO BE IMPLEMENTED LATER WHEN WEBSCRAPING IS FINISHED
 
 if __name__ == '__main__':
 	random_word_gen = RandomWordGenerator()
 	print(random_word_gen.get_random_word())
+
+	#DISCLAIMER: METHODS BELOW FOR TESTING ONLY
+	"""
+	print("original list ")
+	print(random_word_gen.get_rw_test())
+	print("range with a min ") 
+	print(random_word_gen.get_random_words_within_range(min_word_length = 4))
+	print("range with a max ")
+	print(random_word_gen.get_random_words_within_range(max_word_length = 5))
+	print("range with a min and max") 
+	print(random_word_gen.get_random_words_within_range(min_word_length = 2, max_word_length = 5))
+	print("with a start letter ") 
+	print(random_word_gen.get_random_words_start_with(start_letter = 't'))
+	print("alphabet order ") 
+	print(random_word_gen.get_random_words_order())
+	print("rev alpha ") 
+	print(random_word_gen.get_random_words_order(order='rev alpha'))
+	print("len ") 
+	print(random_word_gen.get_random_words_order(order='len'))
+	print("rev len ") 
+	print(random_word_gen.get_random_words_order(order='rev len'))
+	print("contains")
+	print(random_word_gen.get_random_words_contains('pre'))
+	"""
+
