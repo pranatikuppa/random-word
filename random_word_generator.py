@@ -10,10 +10,13 @@ class RandomWordGenerator:
 
 	def __init__(self):
 		#REMINDER: change this link with your personal info !! 
-		self.__driver = webdriver.Chrome("/Users/pranatikuppa/Desktop/random_words/chromedriver")
-		self.__path = 'words.txt'
+		# self.__driver = webdriver.Chrome("/Users/pranatikuppa/Desktop/random_words/chromedriver")
+		self.__driver = webdriver.Chrome("./chromedriver")
+		self.__dictionary_path = 'words.txt'
+		self.__common_words_path = 'common_words.txt'
 		self.__special_char_pattern = '/[^a-zA-Z ]/g'
 		self.__dictionary_words = self.__load_dictionary()
+		self.__common_words = self.__load_common_words()
 		# pyautogui.hotkey('command', 'shift', 'w', interval=0.25)
 
 	def __special_char_filter(self, word):
@@ -22,11 +25,22 @@ class RandomWordGenerator:
 		else:
 			return True
 
+	def __common_words_filter(self, word):
+		if (word.lower() in self.__common_words):
+			return False
+		else:
+			return True
+
 	def __load_dictionary(self):
-		with open(self.__path) as word_file:
+		with open(self.__dictionary_path) as word_file:
 			all_words = set(word_file.read().split())
 		valid_words = [word for word in all_words if self.__special_char_filter(word)]
 		return valid_words
+
+	def __load_common_words(self):
+		with open(self.__common_words_path) as word_file:
+			all_words = set(word_file.read().split())
+		return all_words
 
 	def __get_dictionary_word(self):
 		i = random.randint(0, len(self.__dictionary_words))
@@ -52,11 +66,17 @@ class RandomWordGenerator:
 		# self.__driver.quit()
 
 	def __get_random_word_from_web(self):
-		website = __get_random_website()
+		website = self.__get_random_website()
 		self.__driver.get(website)
+		all_website_text = self.__driver.find_element_by_tag_name("body").text
+		website_words = all_website_text.split()
+		filtered_website_words = [word for word in website_words if self.__common_words_filter(word)]
+		i = random.randint(0, len(filtered_website_words) - 1)
+		return filtered_website_words[i];
 
 	def get_random_word(self):
-		return self.__get_random_word_from_web()
+		s = self.__get_random_word_from_web()
+		return re.sub(r'[^\w\s]','',s).lower()
 
 	#BELOW HERE: METHODS PK HAS WORKED ON
 	def get_random_words(self, number_of_words=1000):

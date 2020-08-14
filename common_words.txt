@@ -1,0 +1,500 @@
+it
+you
+he
+which
+she
+we
+her
+there
+what
+who
+them
+him
+me
+one
+us
+something
+nothing
+himself
+anything
+itself
+themselves
+whose
+someone
+everything
+herself
+anyone
+whatever
+everyone
+whom
+myself
+yourself
+none
+somebody
+everybody
+nobody
+anybody
+plenty
+mine
+ourselves
+yours
+no-one
+ours
+ye
+yer
+theirs
+whatsoever
+whichever
+thou
+oneself
+nought
+summat
+'im
+em
+'er
+he/she
+yu
+nowt
+ah
+'is
+owt
+meself
+dem
+nothin'
+'un
+naught
+somethin'
+thine
+aught
+yerself
+thyself
+she/he
+somewhat
+theirselves
+nuffink
+ourself
+whomsoever
+dere
+anythin'
+whomever
+themself
+dey
+youse
+whosoever
+theirself
+you-know-who
+hisself
+hirself
+everythin'
+mesen
+what-have-you
+hym
+someting
+hir
+nuthin
+m'self
+whate'er
+youself
+a
+ownself
+some-body
+yo'self
+hem
+'emselves
+cha
+hersen
+hitself
+oursen
+thair
+wee
+theyr
+theyself
+theyselves
+few
+"thi sen"
+'a
+"all the world"
+thselves
+what's-his-name
+hit
+noone
+"you gals"
+whatshername
+noöne
+sie
+overmuch
+"you guys"
+yiz
+Me
+enuf
+zir
+missen
+wi
+"me fein"
+hor
+such
+whatso
+whome
+"me fellow"
+Thine
+youuns
+that's
+yon
+"all y'all"
+youz
+"all y'all's"
+this
+shi
+nish
+"such like"
+whomso
+youze
+al.
+"you lot"
+whomst
+"this and that"
+"me
+"you name it"
+hissen
+(s)he
+suchlike
+thame
+yowe
+ze
+She
+everthang
+"she or he"
+much
+"this one"
+co
+"jack shit"
+dat
+dis
+"damn all"
+nuthin'
+where
+yas
+many
+everwho
+nuthing
+"every body"
+certain
+noot
+you-all
+zirself
+you-know-what
+nother
+ou
+You-Know-Who
+Her
+SMTH
+you-uns
+"her ass"
+ich
+smth
+somthing
+nother
+yoo
+"Her Excellency"
+zis
+e'ryting
+"fuck all"
+ev'rythang
+nothin
+"Her Imperial Majesty"
+hse
+evrythin
+summet
+ev'rything
+"Her Maj"
+thissen
+evrything
+"Her Majesty"
+thissun
+ev'ryting
+sich
+der
+"her nibs"
+"Her Royal Highness"
+"Her Royal Majesty"
+thems
+"the whole world"
+yo
+"every man Jack"
+quhat
+ev'ythang
+"every one"
+ev'ythin'
+Myself
+quhatsoever
+ALCON
+ev'ything
+myselfe
+eirs
+mysell
+eirself
+myselven
+"not a one"
+myselves
+"nothing to write home about"
+quhich
+quho
+ought
+yores
+coself
+sombody
+hella
+Majesty
+othersome
+mickle
+summot
+"a few"
+nothink
+summut
+"everybody and their brother"
+"everybody and their dog"
+fele
+sombuddy
+My
+sombudy
+Mine
+thay
+allyou
+mee
+"my ass"
+oi
+yur
+dar
+we-uns
+Oi
+tho
+everybuddy
+some
+everycunt
+dese
+ilkon
+"some body"
+yee
+ilkoon
+"what have you"
+Godself
+we'uns
+hoo
+"one and all"
+"everyone and his brother"
+sumpin'
+xe
+"everyone and their brother"
+all
+"everyone and their dog"
+limpeh
+"everyone and their grandma"
+"one another"
+"everyone and their mother"
+yorn
+hu
+"everyone else"
+xem
+"no matter what"
+yorself
+either
+mesilf
+some1
+wat
+"all and some"
+thyne
+y'awl
+yees
+"all and sundry"
+everypony
+somebody's
+everytang
+"my nibs"
+everythang
+somebuddy
+yaw'll
+somebudy
+toder
+ey
+somedeal
+tha
+any
+"no one"
+nobody's
+yoself
+everytin'
+sumthin'
+yeh
+"each other"
+'hem
+ch
+everyting
+"someone else"
+sumthing
+yo'selves
+"our asses"
+yoselves
+ch-
+Thou
+anie
+noboody
+somepin
+uz
+nuttin'
+nobuddy
+emself
+somepody
+nobudy
+urs
+eachother
+nada
+somepoty
+whether
+another
+sum
+her's
+nen
+Your
+Her's
+"any old thing"
+whethersoever
+"your all's"
+urself
+"your ass"
+Hers
+self
+nauther
+"your asses"
+"little old me"
+sum1
+our'n
+thers
+e'rybody
+t'other
+ourn
+"Your Dukeness"
+tother
+somesing
+"Your Excellency"
+feel
+"your grace"
+Who
+zumat
+Herself
+"your guys's"
+sumat
+"Your Highness"
+Him
+"anybody else"
+somethang
+"Your Highnessness"
+him/herself
+one's
+"your Honor"
+xyrself
+"Your Honour"
+"Your Imperial Majesty"
+hirs
+"Your Maj"
+anybody's
+"Your Majesty"
+"your man"
+zummat
+anybuddy
+zummet
+anybudy
+zummut
+"your mother"
+sumbody
+whateffer
+zum'ot
+sumbuddy
+"one's self"
+per
+whatevah
+"your nibs"
+"Your Rottenness"
+the'e
+thon
+"anyone else"
+"bugger all"
+whiche
+"Your Worship"
+"piss all"
+"whatever floats your boat"
+"Your Worshipfulness"
+"something to write home about"
+Thee
+e'rythang
+"thee sen"
+which's
+whichsoe'er
+whoes
+whichsoever
+whoever
+hawt
+thonself
+tone
+something's
+anypony
+sumet
+shee
+overmany
+Himself
+theeself
+thoo
+anythang
+'um
+himselfe
+himsell
+e'rythin'
+your'n
+himselve
+e'rything
+whatevs
+You
+yourn
+thor
+usself
+your's
+whatevuh
+"yer man"
+"you all"
+"anything else"
+whoseever
+Yours
+His
+elsewhat
+netherworld
+whathaveyou
+same
+whosesoever
+y'all
+"yours trulies"
+"his ass"
+enough
+pers
+"His Excellency"
+thow
+anythink
+whosever
+ya'll
+"yours truly"
+Yourself
+yuh
+whoso
+yourselfs
+that
+"His Imperial Majesty"
+Thyself
+"His Maj"
+thyselves
+anyting
+y'all's
+"His Majesty"
+thysen
+y'allself
+"his nibs"
+y'allselves
+hee
+yere
