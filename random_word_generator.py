@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import re
 import random
+from string import capwords 
 # import pyautogui
 
 class RandomWordGenerator:
@@ -57,6 +58,7 @@ class RandomWordGenerator:
 	def get_random_word(self):
 		return self.__get_random_word_from_web()
 
+	#BELOW HERE: METHODS PK HAS WORKED ON
     def get_random_words(self, number_of_words="1000"):
     	words = []
     	while number_of_words != 0: 
@@ -84,6 +86,16 @@ class RandomWordGenerator:
     	else: 
     		valid_words = [word for word in raw_words if word[0] == start_letter]
     	return valid_words
+
+    def get_random_words_order(self, order='alpha'): 
+    	if order == 'alpha': 
+    		return get_random_words().sort(key = lambda l: l.lower())
+    	else if order == 'rev alpha': 
+    		return get_random_words().sort(reverse=True, key = lambda l: l.lower())
+    	else if order == 'len': 
+    		return get_random_words().sort(key = len)
+    	else if order == 'rev len':
+    		return get_random_words().sort(reverse=True, key = len)
 
     # def get_random_words_contains(self, substring):
 
