@@ -74,7 +74,9 @@ class RandomWordGenerator:
 
 	def get_random_word(self):
 		s = self.__get_random_word_from_web()
-		return re.sub(r'[^\w\s]','',s).lower()
+		s = re.sub(r'[^\w\s]','',s).lower()
+		s = s.replace(" ", "")
+		return s
 
 	#BELOW HERE: METHODS PK HAS WORKED ON
 	def get_random_words(self, number_of_words=1000):
