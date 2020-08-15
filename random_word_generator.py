@@ -11,7 +11,6 @@ class RandomWordGenerator:
 
 	def __init__(self):
 		#REMINDER: change this link with your personal info !! 
-		# self.__driver = webdriver.Chrome("/Users/pranatikuppa/Desktop/random_words/chromedriver")
 		self.__chrome_options = webdriver.ChromeOptions()
 		self.__chrome_options.add_argument('window-size=800x841')
 		self.__chrome_options.add_argument('headless')
@@ -80,6 +79,7 @@ class RandomWordGenerator:
 		self.__driver = webdriver.Chrome(executable_path = self.__chrome_path, options = self.__chrome_options)
 		s = self.__get_random_word_from_web()
 		word = re.sub(r'[^\w\s]','',s).lower()
+		word = word.replace(" ", "")
 		if quit: 
 			self.__driver.quit()
 		return word
