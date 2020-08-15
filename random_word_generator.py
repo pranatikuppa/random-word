@@ -67,7 +67,8 @@ class RandomWordGenerator:
 		# self.__driver.quit()
 
 	def __get_random_word_from_web(self):
-		website = self.__get_random_website()
+		# website = self.__get_random_website()
+		website = "https://www.google.com/search?source=hp&ei=HzM3X7GqGoOvtgWDuomABg&q=MOTAS";
 		self.__driver.get(website)
 		all_website_text = self.__driver.find_element_by_tag_name("body").text
 		website_words = all_website_text.split()
@@ -76,12 +77,16 @@ class RandomWordGenerator:
 		return filtered_website_words[i];
 
 	def get_random_word(self, quit=True):
-		self.__driver = webdriver.Chrome(executable_path = self.__chrome_path, options = self.__chrome_options)
-		s = self.__get_random_word_from_web()
-		word = re.sub(r'[^\w\s]','',s).lower()
-		word = word.replace(" ", "")
-		if quit: 
-			self.__driver.quit()
+		word = "";
+		try:
+			self.__driver = webdriver.Chrome(executable_path = self.__chrome_path, options = self.__chrome_options)
+			s = self.__get_random_word_from_web()
+			word = re.sub(r'[^\w\s]','',s).lower()
+			word = word.replace(" ", "")
+			if quit: 
+				self.__driver.quit()
+		except:
+			print("An error occurred. Please try to rerun the method or contact us with the issue.")
 		return word
 
 	#BELOW HERE: METHODS PK HAS WORKED ON
