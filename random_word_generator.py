@@ -10,7 +10,6 @@ class RandomWordGenerator:
 
 	def __init__(self):
 		#REMINDER: change this link with your personal info !! 
-		# self.__driver = webdriver.Chrome("/Users/pranatikuppa/Desktop/random_words/chromedriver")
 		self.__driver = webdriver.Chrome("./chromedriver")
 		self.__dictionary_path = 'words.txt'
 		self.__common_words_path = 'common_words.txt'
