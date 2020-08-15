@@ -55,8 +55,6 @@ class RandomWordGenerator:
 
 		all_websites = self.__driver.find_elements_by_class_name('g')
 		i = random.randint(0, len(all_websites) - 1)
-		print(len(all_websites))
-		print(i)
 
 		selected_website = all_websites[i]
 		nested_rc_r = selected_website.find_element_by_class_name('rc').find_element_by_class_name('r')
