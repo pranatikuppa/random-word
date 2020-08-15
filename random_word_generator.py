@@ -67,8 +67,7 @@ class RandomWordGenerator:
 		# self.__driver.quit()
 
 	def __get_random_word_from_web(self):
-		# website = self.__get_random_website()
-		website = "https://www.google.com/search?source=hp&ei=HzM3X7GqGoOvtgWDuomABg&q=MOTAS";
+		website = self.__get_random_website()
 		self.__driver.get(website)
 		all_website_text = self.__driver.find_element_by_tag_name("body").text
 		website_words = all_website_text.split()
