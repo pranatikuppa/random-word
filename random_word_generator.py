@@ -4,19 +4,24 @@ import pandas as pd
 import re
 import random
 from string import capwords 
+from selenium.webdriver.chrome.options import Options
 # import pyautogui
 
 class RandomWordGenerator:
 
 	def __init__(self):
 		#REMINDER: change this link with your personal info !! 
-		self.__driver = webdriver.Chrome("./chromedriver")
+		# self.__driver = webdriver.Chrome("/Users/pranatikuppa/Desktop/random_words/chromedriver")
+		self.__chrome_options = webdriver.ChromeOptions()
+		self.__chrome_options.add_argument('window-size=800x841')
+		self.__chrome_options.add_argument('headless')
+		self.__chrome_path = r"./chromedriver"
+		self.__driver = webdriver.Chrome(executable_path = self.__chrome_path, options = self.__chrome_options)
 		self.__dictionary_path = 'words.txt'
 		self.__common_words_path = 'common_words.txt'
 		self.__special_char_pattern = '/[^a-zA-Z ]/g'
 		self.__dictionary_words = self.__load_dictionary()
 		self.__common_words = self.__load_common_words()
-		# pyautogui.hotkey('command', 'shift', 'w', interval=0.25)
 
 	def __special_char_filter(self, word):
 		if (re.match(self.__special_char_pattern, word)):
@@ -71,18 +76,23 @@ class RandomWordGenerator:
 		i = random.randint(0, len(filtered_website_words) - 1)
 		return filtered_website_words[i];
 
-	def get_random_word(self):
+	def get_random_word(self, quit=True):
+		self.__driver = webdriver.Chrome(executable_path = self.__chrome_path, options = self.__chrome_options)
 		s = self.__get_random_word_from_web()
-		s = re.sub(r'[^\w\s]','',s).lower()
-		s = s.replace(" ", "")
-		return s
+		word = re.sub(r'[^\w\s]','',s).lower()
+		if quit: 
+			self.__driver.quit()
+		return word
 
 	#BELOW HERE: METHODS PK HAS WORKED ON
-	def get_random_words(self, number_of_words=1000):
+	def get_random_words(self, num_of_words=1000):
 		words = []
-		while number_of_words != 0: 
-			words.append(random_word_gen.get_random_word())
-			number_of_words -=1
+		while num_of_words != 0: 
+			if num_of_words != 1: 
+				words.append(random_word_gen.get_random_word(quit=False))
+			else: 
+				words.append(random_word_gen.get_random_word(quit=True))
+			num_of_words -=1
 		return words
 
 	#DISCLAIMER: THIS METHOD FOR TESTING PURPOSES ONLY
@@ -90,9 +100,9 @@ class RandomWordGenerator:
 		return ['test', 'words', 'generator', 'deletion', 'hi', 'there', 'preamble', 'precursor']
 
 	def get_random_words_within_range(self, min_word_length=0, max_word_length=-1, num_of_words = 1000):
-		#raw_words = random_word_gen.get_random_words(num_of_words)
+		raw_words = random_word_gen.get_random_words(num_of_words)
 		#DISCLAIMER: LINE BELOW FOR TESTING PURPOSES ONLY
-		raw_words = random_word_gen.get_rw_test()
+		#raw_words = random_word_gen.get_rw_test()
 
 		if min_word_length == 0 and max_word_length == -1:
 			return raw_words
@@ -105,9 +115,9 @@ class RandomWordGenerator:
 		return valid_words
 
 	def get_random_words_start_with(self, start_letter=None, num_of_words=1000):
-		#raw_words = random_word_gen.get_random_words()
+		raw_words = random_word_gen.get_random_words(num_of_words)
 		#DISCLAIMER: LINE BELOW FOR TESTING PURPOSES ONLY
-		raw_words = random_word_gen.get_rw_test()
+		#raw_words = random_word_gen.get_rw_test()
 		if start_letter == None: 
 			return raw_words
 		else: 
@@ -115,9 +125,9 @@ class RandomWordGenerator:
 		return valid_words
 
 	def get_random_words_order(self, order='alpha',num_of_words=1000): 
-		#aw_words = random_word_gen.get_random_words()
+		raw_words = random_word_gen.get_random_words(num_of_words)
 		#DISCLAIMER: LINE BELOW FOR TESTING PURPOSES ONLY
-		raw_words = random_word_gen.get_rw_test()
+		#raw_words = random_word_gen.get_rw_test()
 		if order == 'alpha': 
 			raw_words.sort(key = lambda l: l.lower())
 			return raw_words
@@ -132,9 +142,9 @@ class RandomWordGenerator:
 			return raw_words
 
 	def get_random_words_contains(self, substr=''):
-		#aw_words = random_word_gen.get_random_words()
+		raw_words = random_word_gen.get_random_words()
 		#DISCLAIMER: LINE BELOW FOR TESTING PURPOSES ONLY
-		raw_words = random_word_gen.get_rw_test()
+		#raw_words = random_word_gen.get_rw_test()
 		return [word for word in raw_words if substr in word]
 
 	#def include_pos(self, pos)
@@ -151,23 +161,28 @@ if __name__ == '__main__':
 	"""
 	print("original list ")
 	print(random_word_gen.get_rw_test())
+	"""
+	print("original list ")
+	print(random_word_gen.get_random_words(num_of_words=2))
+	"""
 	print("range with a min ") 
-	print(random_word_gen.get_random_words_within_range(min_word_length = 4))
+	print(random_word_gen.get_random_words_within_range(min_word_length = 4, num_of_words=6))
 	print("range with a max ")
-	print(random_word_gen.get_random_words_within_range(max_word_length = 5))
+	print(random_word_gen.get_random_words_within_range(max_word_length = 5, num_of_words=6))
 	print("range with a min and max") 
-	print(random_word_gen.get_random_words_within_range(min_word_length = 2, max_word_length = 5))
+	print(random_word_gen.get_random_words_within_range(min_word_length = 2, max_word_length = 5, num_of_words=6))
 	print("with a start letter ") 
-	print(random_word_gen.get_random_words_start_with(start_letter = 't'))
+	print(random_word_gen.get_random_words_start_with(start_letter = 't', num_of_words=6))
 	print("alphabet order ") 
 	print(random_word_gen.get_random_words_order())
 	print("rev alpha ") 
-	print(random_word_gen.get_random_words_order(order='rev alpha'))
+	print(random_word_gen.get_random_words_order(order='rev alpha', num_of_words=6))
 	print("len ") 
-	print(random_word_gen.get_random_words_order(order='len'))
+	print(random_word_gen.get_random_words_order(order='len', num_of_words=6))
 	print("rev len ") 
-	print(random_word_gen.get_random_words_order(order='rev len'))
+	print(random_word_gen.get_random_words_order(order='rev len', num_of_words=6))
 	print("contains")
-	print(random_word_gen.get_random_words_contains('pre'))
+	print(random_word_gen.get_random_words_contains('pre', num_of_words=6))
 	"""
+
 
