@@ -1,2 +1,2 @@
 # Random Word Generator
-A python package to generate random words.
+A python package to generate endless random words.
