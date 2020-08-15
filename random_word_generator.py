@@ -4,6 +4,7 @@ import pandas as pd
 import re
 import random
 from string import capwords 
+from selenium.webdriver.chrome.options import Options
 # import pyautogui
 
 class RandomWordGenerator:
@@ -11,13 +12,16 @@ class RandomWordGenerator:
 	def __init__(self):
 		#REMINDER: change this link with your personal info !! 
 		# self.__driver = webdriver.Chrome("/Users/pranatikuppa/Desktop/random_words/chromedriver")
-		self.__driver = webdriver.Chrome("./chromedriver")
+		self.__chrome_options = webdriver.ChromeOptions()
+		self.__chrome_options.add_argument('window-size=800x841')
+		self.__chrome_options.add_argument('headless')
+		self.__chrome_path = r"./chromedriver"
+		self.__driver = webdriver.Chrome(executable_path = self.__chrome_path, options = self.__chrome_options)
 		self.__dictionary_path = 'words.txt'
 		self.__common_words_path = 'common_words.txt'
 		self.__special_char_pattern = '/[^a-zA-Z ]/g'
 		self.__dictionary_words = self.__load_dictionary()
 		self.__common_words = self.__load_common_words()
-		# pyautogui.hotkey('command', 'shift', 'w', interval=0.25)
 
 	def __special_char_filter(self, word):
 		if (re.match(self.__special_char_pattern, word)):
@@ -73,7 +77,7 @@ class RandomWordGenerator:
 		return filtered_website_words[i];
 
 	def get_random_word(self, quit=True):
-		self.__driver = webdriver.Chrome("./chromedriver")
+		self.__driver = webdriver.Chrome(executable_path = self.__chrome_path, options = self.__chrome_options)
 		s = self.__get_random_word_from_web()
 		word = re.sub(r'[^\w\s]','',s).lower()
 		if quit: 
