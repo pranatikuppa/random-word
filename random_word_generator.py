@@ -17,10 +17,10 @@ class RandomWordGenerator:
 		self.__chrome_path = r"./chromedriver"
 		self.__driver = webdriver.Chrome(executable_path = self.__chrome_path, options = self.__chrome_options)
 		self.__dictionary_path = 'words.txt'
-		self.__common_words_path = 'common_words.txt'
+		self.__pronouns_path = 'pronouns.txt'
 		self.__special_char_pattern = '/[^a-zA-Z ]/g'
 		self.__dictionary_words = self.__load_dictionary()
-		self.__common_words = self.__load_common_words()
+		self.__pronouns = self.__load_pronouns()
 
 	def __special_char_filter(self, word):
 		if (re.match(self.__special_char_pattern, word)):
@@ -28,8 +28,8 @@ class RandomWordGenerator:
 		else:
 			return True
 
-	def __common_words_filter(self, word):
-		if (word.lower() in self.__common_words):
+	def __pronouns_filter(self, word):
+		if (word.lower() in self.__pronouns):
 			return False
 		else:
 			return True
@@ -40,8 +40,8 @@ class RandomWordGenerator:
 		valid_words = [word for word in all_words if self.__special_char_filter(word)]
 		return valid_words
 
-	def __load_common_words(self):
-		with open(self.__common_words_path) as word_file:
+	def __load_pronouns(self):
+		with open(self.__pronouns_path) as word_file:
 			all_words = set(word_file.read().split())
 		return all_words
 
@@ -71,7 +71,7 @@ class RandomWordGenerator:
 		self.__driver.get(website)
 		all_website_text = self.__driver.find_element_by_tag_name("body").text
 		website_words = all_website_text.split()
-		filtered_website_words = [word for word in website_words if self.__common_words_filter(word)]
+		filtered_website_words = [word for word in website_words if self.__pronouns_filter(word)]
 		i = random.randint(0, len(filtered_website_words) - 1)
 		return filtered_website_words[i];
 
