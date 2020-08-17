@@ -19,29 +19,34 @@ class RandomWordGenerator:
 		self.__dictionary_path = 'words.txt'
 		self.__pronouns_path = 'pronouns.txt'
 		self.__conjunctions_path = 'conjunctions.txt'
+		self.__interjections_path = 'interjections.txt'
+		self.__prepositions_path = 'prepositions.txt'
+		self.__articles_path = 'articles.txt'
 		self.__special_char_pattern = '/[^a-zA-Z ]/g'
 		self.__dictionary_words = self.__load_dictionary()
 		self.__pronouns = self.__load_pronouns()
+		self.__prepositions = self.__load_prepositions()
+		self.__interjections = self.__load_interjections()
+		self.__articles = self.__load_articles()
 		self.__conjunctions = self.__load_conjunctions()
 
 	def __special_char_filter(self, word):
-		if (re.match(self.__special_char_pattern, word)):
-			return False
-		else:
-			return True
+		return !re.match(self.__special_char_pattern, word)
 
 	def __pronouns_filter(self, word):
-		if (word.lower() in self.__pronouns):
-			return False
-		else:
-			return True
+		return word.lower() not in self.__pronouns
 
 	def __conjunctions_filter(self, word):
-		if (word.lower() in self.__conjunctions):
-			return False
-		else:
-			return True
+		return word.lower() not in self.__conjunctions
 
+	def __prepositions_filter(self, word):
+		return word.lower() not in self.__prepositions
+
+	def __interjections_filter(self, word):
+		return word.lower() not in self.__interjections
+
+	def __articles_filter(self, word):
+		return word.lower() not in self.__articles
 
 	def __load_dictionary(self):
 		with open(self.__dictionary_path) as word_file:
@@ -56,6 +61,21 @@ class RandomWordGenerator:
 
 	def __load_conjunctions(self):
 		with open(self.__conjunctions_path) as word_file:
+			all_words = set(word_file.read().split())
+		return all_words
+
+	def __load_prepositions(self):
+		with open(self.__prepositions_path) as word_file:
+			all_words = set(word_file.read().split())
+		return all_words
+
+	def __load_interjections(self):
+		with open(self.__interjections_path) as word_file:
+			all_words = set(word_file.read().split())
+		return all_words
+
+	def __load_articles(self):
+		with open(self.__articles_path) as word_file:
 			all_words = set(word_file.read().split())
 		return all_words
 
@@ -80,35 +100,32 @@ class RandomWordGenerator:
 		# search_box.submit()
 		# self.__driver.quit()
 
-	def exclude(self, words, pos_exclude= ['conj', 'pro'], custom_exclude=[]):
-		filtered_words = [word for word in words]
-		if pos_exclude.contains('conj'): 
-			filtered_words = [word for word in filtered_words if self.__conjunctions_filter(word)]
-		if pos_exclude.contains('pro'): 
-			filtered_words = [word for word in filtered_words if self.__pronouns_filter(word)]
-		if len(custom_exclude) != 0: 
-			filtered_words = [word for word in filtered_words if word not in custom_exclude]
-		return filtered_words
-
-
-	def __get_random_word_from_web(self, exclude=True, pos_exclude = ['conj', 'pro'], custom_exclude=[]):
+	def __get_random_word_from_web(self, conj=True, pro=True, prep=False, inter=False, article=False, custom_exclude=[]):
 		website = self.__get_random_website()
 		self.__driver.get(website)
 		all_website_text = self.__driver.find_element_by_tag_name("body").text
 		website_words = all_website_text.split()
-		
-		if exclude: 
-			filtered_website_words = exclude(website_words, pos_exclude, custom_exclude)
-		else: 
-			filtered_website_words = [word for word in website_words]
+		filtered_words = website_words;
+		if (conj):
+			filtered_words = [word for word in filtered_words if self.__conjunctions_filter(word)]
+		if (pro):
+			filtered_words = [word for word in filtered_words if self.__pronouns_filter(word)]
+		if (prep):
+			filtered_words = [word for word in filtered_words if self.__prepositions_filter(word)]
+		if (inter):
+			filtered_words = [word for word in filtered_words if self.__interjections_filter(word)]
+		if (article):
+			filtered_words = [word for word in filtered_words if self.__articles_filter(word)]
+		if (len(custom_exclude) > 0):
+			filtered_words = [word for word in filtered_words if word not in custom_exclude]
 		i = random.randint(0, len(filtered_website_words) - 1)
 		return filtered_website_words[i];
 
-	def get_random_word(self, quit=True, exclude=True, pos_exclude= ['conj', 'pro'], custom_exclude = []):
+	def get_random_word(self, quit=True, conj=True, pro=True, prep=False, inter=False, article=False, custom_exclude=[]):
 		word = "";
 		try:
 			self.__driver = webdriver.Chrome(executable_path = self.__chrome_path, options = self.__chrome_options)
-			s = self.__get_random_word_from_web()
+			s = self.__get_random_word_from_web(conj, pro, prep, inter, article, custom_exclude)
 			word = re.sub(r'[^\w\s]','',s).lower()
 			word = word.replace(" ", "")
 			if quit: 
