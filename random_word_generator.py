@@ -18,9 +18,11 @@ class RandomWordGenerator:
 		self.__driver = webdriver.Chrome(executable_path = self.__chrome_path, options = self.__chrome_options)
 		self.__dictionary_path = 'words.txt'
 		self.__pronouns_path = 'pronouns.txt'
+		self.__conjunctions_path = 'conjunctions.txt'
 		self.__special_char_pattern = '/[^a-zA-Z ]/g'
 		self.__dictionary_words = self.__load_dictionary()
 		self.__pronouns = self.__load_pronouns()
+		self.__conjunctions = self.__load_conjunctions()
 
 	def __special_char_filter(self, word):
 		if (re.match(self.__special_char_pattern, word)):
@@ -34,6 +36,13 @@ class RandomWordGenerator:
 		else:
 			return True
 
+	def __conjunctions_filter(self, word):
+		if (word.lower() in self.__conjunctions):
+			return False
+		else:
+			return True
+
+
 	def __load_dictionary(self):
 		with open(self.__dictionary_path) as word_file:
 			all_words = set(word_file.read().split())
@@ -42,6 +51,11 @@ class RandomWordGenerator:
 
 	def __load_pronouns(self):
 		with open(self.__pronouns_path) as word_file:
+			all_words = set(word_file.read().split())
+		return all_words
+
+	def __load_conjunctions(self):
+		with open(self.__conjunctions_path) as word_file:
 			all_words = set(word_file.read().split())
 		return all_words
 
@@ -66,16 +80,31 @@ class RandomWordGenerator:
 		# search_box.submit()
 		# self.__driver.quit()
 
-	def __get_random_word_from_web(self):
+	def exclude(self, words, pos_exclude= ['conj', 'pro'], custom_exclude=[]):
+		filtered_words = [word for word in words]
+		if pos_exclude.contains('conj'): 
+			filtered_words = [word for word in filtered_words if self.__conjunctions_filter(word)]
+		if pos_exclude.contains('pro'): 
+			filtered_words = [word for word in filtered_words if self.__pronouns_filter(word)]
+		if len(custom_exclude) != 0: 
+			filtered_words = [word for word in filtered_words if word not in custom_exclude]
+		return filtered_words
+
+
+	def __get_random_word_from_web(self, exclude=True, pos_exclude = ['conj', 'pro'], custom_exclude=[]):
 		website = self.__get_random_website()
 		self.__driver.get(website)
 		all_website_text = self.__driver.find_element_by_tag_name("body").text
 		website_words = all_website_text.split()
-		filtered_website_words = [word for word in website_words if self.__pronouns_filter(word)]
+		
+		if exclude: 
+			filtered_website_words = exclude(website_words, pos_exclude, custom_exclude)
+		else: 
+			filtered_website_words = [word for word in website_words]
 		i = random.randint(0, len(filtered_website_words) - 1)
 		return filtered_website_words[i];
 
-	def get_random_word(self, quit=True):
+	def get_random_word(self, quit=True, exclude=True, pos_exclude= ['conj', 'pro'], custom_exclude = []):
 		word = "";
 		try:
 			self.__driver = webdriver.Chrome(executable_path = self.__chrome_path, options = self.__chrome_options)
